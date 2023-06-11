@@ -1,19 +1,13 @@
 import { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Wrapper from './Wrapper';
 import Statistics from './Statistics';
 import FeedbackOptions from './FeedbackOptions';
 import Section from './Section';
 import Notification from './Notification';
 
-export const App = () => {
-  const initialValue = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  };
-  
-  const [options, setOptions] = useState(initialValue);
+export const App = ({feedback}) => {  
+  const [options, setOptions] = useState(feedback);
 
   const onLeaveFeedback = option => {
     setOptions(prevOptions => {
@@ -58,4 +52,12 @@ export const App = () => {
       </Section>
     </Wrapper>
   );
+};
+
+App.propTypes = {
+  defaultProps: PropTypes.PropTypes.shape({
+    good: PropTypes.number.isRequired,
+    neutral: PropTypes.number.isRequired,
+    bad: PropTypes.number.isRequired,
+  }),
 };
